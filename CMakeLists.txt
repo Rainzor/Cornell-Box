@@ -6,14 +6,18 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
 
+add_subdirectory(external)
+
+add_executable(CornellBox src/main.cpp)
+
+target_link_libraries(CornellBox PRIVATE ImGui)
+
 find_package(OpenGL REQUIRED)
 find_package(GLFW3 REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(GLM REQUIRED)
 
-add_executable(CornellBox src/main.cpp)
-
-target_link_libraries(CornellBox OpenGL::GL glfw GLEW::GLEW glm::glm)
+target_link_libraries(CornellBox PRIVATE OpenGL::GL glfw GLEW::GLEW glm::glm)
 
 file(COPY shaders/ DESTINATION ${CMAKE_BINARY_DIR}/shaders)
 
